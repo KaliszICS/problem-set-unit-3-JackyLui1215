@@ -32,8 +32,8 @@ public class ProblemSet {
 	//Determines if Email is validOrInvalid (Follows rules and Exceptions)
 	public static String validOrInvalid(String email) {
 
-	 if(email.length() <= 1) { //Checks if the email length is above 1 character before starting(prevent error)
-     	return (email + ": Invalid: Email is too short.");
+	 if(email.length() == 0) { //Checks if the email length is above 1 character before starting(prevent error)
+     	return ("Invalid: No Email was detected.");
     }
 
    	 if(!email.contains("@")) { //Checks for @ symbol
@@ -88,7 +88,7 @@ public class ProblemSet {
         gmail = gmail.replace("_", "");
         String normalizeGmail = gmail.toLowerCase();
         gmail = (gmail + (domain(email))).toLowerCase(); //Normalizes gmail
-        return (gmail + (": Valid (Gmail Normalized) | ") + ("Local: ") + (normalizeGmail) + " | " + ("Domain: ") + (domain(email)).toLowerCase()); //Displays local and domain of the email
+        return (email + (": Valid (Gmail Normalized) | ") + ("Local: ") + (normalizeGmail) + " | " + ("Domain: ") + (domain(email)).toLowerCase()); //Displays local and domain of the email
     }
 
     return (email + (": Valid | ") + ("Local: ") + (local(email)) + " | " + ("Domain: ") + (domain(email))); //Displays local and domain of the email
