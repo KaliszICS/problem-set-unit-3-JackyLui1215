@@ -13,26 +13,28 @@ public class ProblemSet {
 		System.out.print("Enter two email addresses: ");
 		String email = sc.nextLine();
         email = email.trim(); //Removes any leading or trailing spaces from the input
-        if (!(email.contains(","))) { //Checks if the two emails are seperated with a comma
-            System.out.println("Error. Input must contain a comma seperating the two emails.");
+        if (!((email.contains(",")) && (email.indexOf(",") == email.lastIndexOf(",")))) { //Checks if the two emails are seperated with a single comma 
+            System.out.println("Error. Input must contain a single comma seperating the two emails.");
         }
-        else if (email.indexOf(",") == email.lastIndexOf(",")) { //Determines if more than one comma exists
+
+        else if ((email.startsWith(",") || (email.endsWith(",")))) {
+            System.out.println("Formatting Error. Example format: john.doe@gmail.com, john.doe@gmail.com");
+        }
+
+        else { //Begins to parse the two emails
             String firstEmail = email.substring(0, (email.indexOf(","))).trim();
             String secondEmail = email.substring(email.indexOf(",") + 1).trim();
             System.out.println(validOrInvalid(firstEmail));
             System.out.println(validOrInvalid(secondEmail));
         }
-		else {
-            System.out.println("Formatting Error. Example format: john.doe@gmail.com, john.doe@gmail.com");
-        }
+
 		sc.close();
-        
 	}
 
 	//Determines if Email is validOrInvalid (Follows basic rules and Exceptions)
 	public static String validOrInvalid(String email) {
 
-	 if (email.length() == 0) { //Checks if the email length is above 1 character before starting(prevent error)
+	 if (email.length() == 0) { //Checks if the email length is above 1 character before starting(prevents error)
      	 return ("Invalid: No Email was detected.");
     }
 
@@ -90,9 +92,7 @@ public class ProblemSet {
     }
 
     if (domain(email).equalsIgnoreCase("gmail.com")) { //Exception C
-         String normalizedLocal = local(email).replace(".", "").replace("+", "").replace("_", "").toLowerCase(); //Normalizes gmail
-         String normalizedDomain = domain(email).toLowerCase();
-         return (email + (": Valid (Gmail normalized) | ") + ("Local: ") + (normalizedLocal) + " | " + ("Domain: ") + (normalizedDomain)); //Displays local and domain of the email
+         return (email + (": Valid (Gmail normalized) | ") + ("Local: ") + (local(email)) + " | " + ("Domain: ") + ((domain(email)))); //Displays local and domain of the email
     }
 
     return (email + (": Valid | ") + ("Local: ") + (local(email)) + " | " + ("Domain: ") + (domain(email))); //Displays local and domain of the email
