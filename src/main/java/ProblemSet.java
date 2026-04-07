@@ -13,12 +13,12 @@ public class ProblemSet {
 		System.out.print("Enter two email addresses: ");
 		String email = sc.nextLine();
         email = email.trim(); //Removes any leading or trailing spaces from the input
-        if (!((email.contains(",")) && (email.indexOf(",") == email.lastIndexOf(",")))) { //Checks if the two emails are seperated with a single comma 
-            System.out.println("Error. Input must contain a single comma seperating the two emails.");
+        if (!((email.contains(",")) && (email.indexOf(",") == email.lastIndexOf(",")))) { //Checks if the two emails are separated with a single comma 
+            System.out.println("Error. Input must contain a single comma separating the two emails.");
         }
 
         else if ((email.startsWith(",") || (email.endsWith(",")))) {
-            System.out.println("Formatting Error. Example format: john.doe@gmail.com, john.doe@gmail.com");
+            System.out.println("Formatting Error. Example format: john.doe@gmail.com, john.doe@gmail.com"); 
         }
 
         else { //Begins to parse the two emails
@@ -34,11 +34,11 @@ public class ProblemSet {
 	//Determines if Email is validOrInvalid (Follows basic rules and Exceptions)
 	public static String validOrInvalid(String email) {
 
-	 if (email.length() == 0) { //Checks if the email length is above 1 character before starting(prevents error)
-     	 return ("Invalid: No Email was detected.");
+    if (email.length() == 0) { //Checks if the email length is above 1 character before starting(prevents error)
+         return ("Invalid: No Email was detected.");
     }
 
-   	 if (!email.contains("@")) { //Checks for @ symbol
+    if (!email.contains("@")) { //Checks for @ symbol
          return (email + ": Invalid: Email is missing an @ symbol.");
     }
 
@@ -79,8 +79,8 @@ public class ProblemSet {
          return (email + ": Invalid: Email contains a + or _ at the beginning of the Email.");
     }
 
-	if (!containsOnlyLetters(domainExtension(email), 0)) { //Checks if Domain extension only contains letters
-		 return (email+ ": Invalid: Domain extension contains symbols or numbers.");
+    if (!containsOnlyLetters(domainExtension(email), 0)) { //Checks if Domain extension only contains letters
+	    return (email+ ": Invalid: Domain extension contains symbols or numbers.");
 	}
 
     if ((domain(email).contains("+")) || (domain(email)).contains("_")) { //Checks if there are + or _ in the domain part of the Email 
@@ -98,11 +98,11 @@ public class ProblemSet {
     return (email + (": Valid | ") + ("Local: ") + (local(email)) + " | " + ("Domain: ") + (domain(email))); //Displays local and domain of the email
 }
 
-    public static String domain(String email) { //seperates the domain of the email (Exception A, allows for subdomains.)
+    public static String domain(String email) { //separates the domain of the email (Exception A, allows for subdomains.)
         return (email.substring((email.indexOf("@") + 1)));
     }
 
-    public static String local(String email) { //seperates the local of the email
+    public static String local(String email) { //separates the local of the email
         return (email.substring(0, (email.indexOf("@"))));
     }
 
