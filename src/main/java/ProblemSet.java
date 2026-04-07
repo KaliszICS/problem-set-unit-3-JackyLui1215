@@ -29,7 +29,7 @@ public class ProblemSet {
         
 	}
 
-	//Determines if Email is validOrInvalid (Follows rules and Exceptions)
+	//Determines if Email is validOrInvalid (Follows basic rules and Exceptions)
 	public static String validOrInvalid(String email) {
 
 	 if (email.length() == 0) { //Checks if the email length is above 1 character before starting(prevent error)
@@ -52,20 +52,25 @@ public class ProblemSet {
          return (email + ": Invalid: Email contains spaces.");
     }
 
-    if (local(email).length() < 1 || local(email).length() > 64) { //Checks the local length (between 1-64 characters)
-         return (email + ": Invalid: Local part of the Email is not between 1-64 characters");
+    if (local(email).length() < 1) { //Checks the local length (between 1-64 characters)
+         return (email + ": Invalid: Local part of the Email is too short.");
+    }
+
+    if (local(email).length() > 64) { //Checks the local length (between 1-64 characters)
+         return (email + ": Invalid: Local part of the Email is too long.");
     }
 
     if (!(domain(email)).contains(".")) { //Checks if the domain contains a "."
          return (email + ": Invalid: Domain part of Email does not contain a period.");
     }
 
-    if (email.contains("..")) { //Checks for consecutive periods
-         return (email + ": Invalid: Email contains consecutive periods.");
-    }
-
     if ((email.length() - email.lastIndexOf(".") - 1) < 2 || (email.length() - email.lastIndexOf(".") - 1) > 6) { //Checks the domain length even if email has a subdomain (2-6 characters)
          return (email + ": Invalid: Domain extension of the email is not between 2-6 characters.");
+    }
+
+    //Exceptions and Edge Cases
+    if (email.contains("..")) { //Checks for consecutive periods
+         return (email + ": Invalid: Email contains consecutive periods.");
     }
 
     if (email.startsWith("+") || (email.endsWith("+") || email.startsWith("_")) || email.endsWith("_")) { //Exception B
@@ -85,13 +90,9 @@ public class ProblemSet {
     }
 
     if (domain(email).equalsIgnoreCase("gmail.com")) { //Exception C
-         String gmail = (local(email)); //Begins to normalize gmail
-         gmail = gmail.replace(".", "");
-         gmail = gmail.replace("+", "");
-         gmail = gmail.replace("_", "");
-         String normalizeGmail = gmail.toLowerCase();
-         gmail = (gmail + (domain(email))).toLowerCase(); //Normalizes gmail
-         return (email + (": Valid (Gmail Normalized) | ") + ("Local: ") + (normalizeGmail) + " | " + ("Domain: ") + (domain(email)).toLowerCase()); //Displays local and domain of the email
+         String normalizedLocal = local(email).replace(".", "").replace("+", "").replace("_", "").toLowerCase(); //Normalizes gmail
+         String normalizedDomain = domain(email).toLowerCase();
+         return (email + (": Valid (Gmail normalized) | ") + ("Local: ") + (normalizedLocal) + " | " + ("Domain: ") + (normalizedDomain)); //Displays local and domain of the email
     }
 
     return (email + (": Valid | ") + ("Local: ") + (local(email)) + " | " + ("Domain: ") + (domain(email))); //Displays local and domain of the email
@@ -120,5 +121,3 @@ public class ProblemSet {
         return containsOnlyLetters(domainExtension, value + 1); //Calls itself until it can return true or false
     }
 }
-
-
