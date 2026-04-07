@@ -66,7 +66,7 @@ public class ProblemSet {
          return (email + ": Invalid: Domain part of Email does not contain a period.");
     }
 
-    if ((email.length() - email.lastIndexOf(".") - 1) < 2 || (email.length() - email.lastIndexOf(".") - 1) > 6) { //Checks the domain length even if email has a subdomain (2-6 characters)
+    if ((domainExtension(email).length() < 2 || (domainExtension(email).length() > 6))) { //Checks the domain length even if email has a subdomain (2-6 characters)
          return (email + ": Invalid: Domain extension of the email is not between 2-6 characters.");
     }
 
