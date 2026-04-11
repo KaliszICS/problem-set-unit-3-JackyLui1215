@@ -1,0 +1,10 @@
+K(30%): 100
+I(30%): 91
+C(10%): 100
+A(30%): 91
+94.6%
+
+Great work Jacky!
+Just two small things.  
+A dot should be fine at the beginning if it is a gmail address (this would have been removed).
+Also your program should still work for 1 email address.
